@@ -20,7 +20,6 @@ paella.plugins.QuestionsPlayerPlugin = Class.create(paella.EventDrivenPlugin,{
 		if(url) {
 			urlxml = ""+url;
 			urlservidor = "";
-			////paella.debug.log("Inicio de llamada Ajax");
 			jQuery.ajax({
 				context: This,
 				type:"GET",
@@ -28,11 +27,9 @@ paella.plugins.QuestionsPlayerPlugin = Class.create(paella.EventDrivenPlugin,{
 				async: false,
 				dataType: "xml",
 				success: function(data){
-					//paella.debug.log("Llamamos a la función parsedata");
 					this.parsedata(data);
 				},
 				error: function(request,status,error){
-					//paella.debug.log ("Error: "+request.responseText);
 					alert("File not found");
 				}
 			});
@@ -44,7 +41,6 @@ paella.plugins.QuestionsPlayerPlugin = Class.create(paella.EventDrivenPlugin,{
 	getEvents:function() { return [paella.events.timeUpdate,paella.events.play,paella.events.seekTo,paella.events.pause,paella.events.endVideo]; },
 
 	onEvent:function(eventType,params) {
-		//paella.debug.log("Tipo de evento: "+eventType);
 		if(eventType=="paella:timeupdate")
 		{
 			this.isStarted = true;
@@ -53,8 +49,6 @@ paella.plugins.QuestionsPlayerPlugin = Class.create(paella.EventDrivenPlugin,{
 		}
 		else if(eventType=="paella:play")
 		{
-			//paella.debug.log("Salta el evento de play");
-			//Hay que llamar aquí al delegate para escribir el evento.
 			if(this.isStarted)
 			{
         		var evento = {
@@ -82,7 +76,6 @@ paella.plugins.QuestionsPlayerPlugin = Class.create(paella.EventDrivenPlugin,{
 		{
 			if(this.isStarted)
 			{
-				//paella.debug.log("Salta el evento del pause");
 				var evento = {
 					timestamp: lastTime,
 					user: this.config.user,
@@ -102,7 +95,6 @@ paella.plugins.QuestionsPlayerPlugin = Class.create(paella.EventDrivenPlugin,{
 		}
 		else if(eventType=="paella:endvideo")
 		{
-			//paella.debug.log("Salta el evento fin de vídeo");
 			var evento = {
 				timestamp: lastTime,
 				user: this.config.user,
@@ -148,7 +140,6 @@ paella.plugins.QuestionsPlayerPlugin = Class.create(paella.EventDrivenPlugin,{
 	},
 
 	showTest:function(test,previous) {
-		//paella.debug.log("Muestro el test títulado "+test.title);
 		var This = this;
 		var Test = test;
 		var question = test.questionsarray[this.numberquestion];
